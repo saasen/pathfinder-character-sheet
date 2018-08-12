@@ -1,20 +1,9 @@
 import React from 'react'
+import Field from '../field/Field'
 
 class Bio extends React.Component {
-
-  calculateLevel = xp => {
-    if (!xp) {
-      return 1
-    }
-
-    if (xp < 1000) return 1
-
-    return xp / 1000
-  }
-
   render() {
-    const { name, ancestry, size, background, $class, xp, alignment, deity, age, gender, languages } = this.props.bio
-    console.log(this.props)
+    const { name, ancestry, size, background, $class, level, xp, alignment, deity, age, gender, languages } = this.props.bio
 
     return (
       <div className="bio">
@@ -23,8 +12,8 @@ class Bio extends React.Component {
         <Field id="size" placeholder="Size" value={size} />
         <Field id="background" placeholder="Background" value={background} />
         <Field id="class" placeholder="Class" value={$class} />
-        <Field id="level" placeholder="Level" value={this.calculateLevel(xp)} />
-        <Field id="xp" placeholder="Experience points (XP)" value={xp} onChange={this.props.onChangeXp} />
+        <Field id="level" placeholder="Level" value={level} />
+        <Field id="xp" placeholder="Experience points (XP)" value={xp} onChange={this.props.onChangeExperiencePoints} />
         <Field id="alignment" placeholder="Alignment" value={alignment} />
         <Field id="deity" placeholder="Deity" value={deity} />
         <Field id="age" placeholder="Age" value={age} />
@@ -34,12 +23,5 @@ class Bio extends React.Component {
     )
   }
 }
-
-const Field = ({ id, placeholder, value, onChange }) => (
-  <div>
-    <label htmlFor={id}>{placeholder}:</label>
-    <input type="text" id={id} name={id} placeholder={placeholder} value={value} onChange={onChange} />
-  </div>
-)
 
 export default Bio

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css'
 import Bio from './components/bio/Bio'
+import Core from './components/core/Core'
 
 class App extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class App extends Component {
         size: "Medium",
         background: "My super-super awesome background",
         $class: "Cleric",
-        xp: 2000,
+        level: 2,
+        experiencePoints: 2000,
         alignment: "Lawful Neutral",
         deity: "Iomedae",
         age: 78,
@@ -22,11 +24,23 @@ class App extends Component {
           "Common",
           "Dwarvish"
         ]
+      },
+      core: {
+        speed: 25,
+        heroPoints: 1
+      },
+      abilityScores: {
+        strength: { value: 18, isKeyAbilityScore: true },
+        dexterity: { value: 12, isKeyAbilityScore: false },
+        constitution: { value: 14, isKeyAbilityScore: false },
+        intelligence: { value: 12, isKeyAbilityScore: false },
+        wisdom: { value: 14, isKeyAbilityScore: false },
+        charisma: { value: 16, isKeyAbilityScore: false }
       }
     }
   }
 
-  changeXp = (event) => {
+  changeExperiencePoints = (event) => {
     console.log(event)
     this.setState({ ...this.state, bio: { ...this.state.bio, xp: event.target.value } })
   }
@@ -36,19 +50,8 @@ class App extends Component {
 
     return (
       <div>
-        <Bio bio={bio} onChangeXp={this.changeXp} />
-        <div className="core">
-          <input type="text" placeholder="Speed (feet)"/>
-          <div className="class-dc">
-            <h3>Class DC</h3>
-            <input type="text" placeholder="DC"/>
-            <p>10 +</p>
-            <input type="text" placeholder="Level"/>
-            <input type="text" placeholder="Key"/>
-          </div>
-
-          <input type="text" placeholder="Hero points"/>
-        </div>
+        <Bio bio={bio} onChangeExperiencePoints={this.changeExperiencePoints} />
+        <Core level={this.state.bio.level} abilityScores={this.state.abilityScores} core={this.state.core} />
       </div>
     );
   }
