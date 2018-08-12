@@ -1,7 +1,15 @@
-body {
+body, input {
   font-family: 'Open Sans';
 }
 
-label {
+label, h3 {
   text-transform: uppercase;
+}
+
+.field {
+  border-bottom: 1px solid black;
+}
+
+input {
+  border: none;
 }
