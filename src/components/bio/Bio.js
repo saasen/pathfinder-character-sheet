@@ -12,7 +12,7 @@ class Bio extends React.Component {
         <Field id="size" placeholder="Size" value={size} />
         <Field id="background" placeholder="Background" value={background} />
         <Field id="class" placeholder="Class" value={$class} />
-        <Field id="level" placeholder="Level" value={level} />
+        <Field id="level" placeholder="Level" value={level} onChange={this.props.onChangeLevel} />
         <Field id="xp" placeholder="Experience points (XP)" value={xp} onChange={this.props.onChangeExperiencePoints} />
         <Field id="alignment" placeholder="Alignment" value={alignment} />
         <Field id="deity" placeholder="Deity" value={deity} />

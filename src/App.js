@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css'
+import React, { Component } from 'react'
 import Bio from './components/bio/Bio'
 import Core from './components/core/Core'
+import Saves from './components/saves/Saves'
+import Senses from './components/senses/Senses'
+
+import './App.css'
 
 class App extends Component {
   constructor(props) {
@@ -36,22 +38,42 @@ class App extends Component {
         intelligence: { value: 12, isKeyAbilityScore: false },
         wisdom: { value: 14, isKeyAbilityScore: false },
         charisma: { value: 16, isKeyAbilityScore: false }
+      },
+      perception: {
+        proficiencyRank: 2
+      },
+      saves: {
+        fortitude: {
+          proficiencyRank: 2
+        },
+        reflex: {
+          proficiencyRank: 1
+        },
+        will: {
+          proficiencyRank: 3
+        }
       }
     }
   }
 
   changeExperiencePoints = (event) => {
-    console.log(event)
     this.setState({ ...this.state, bio: { ...this.state.bio, xp: event.target.value } })
   }
 
+  changeLevel = (event) => {
+    this.setState({ ...this.state, bio: { ...this.state.bio, level: parseInt(event.target.value) } })
+  }
+
   render() {
+    console.log(this.state)
     const { bio } = this.state
 
     return (
       <div>
-        <Bio bio={bio} onChangeExperiencePoints={this.changeExperiencePoints} />
+        <Bio bio={bio} onChangeExperiencePoints={this.changeExperiencePoints} onChangeLevel={this.changeLevel} />
         <Core level={this.state.bio.level} abilityScores={this.state.abilityScores} core={this.state.core} />
+        <Senses level={this.state.bio.level} perception={this.state.perception} wisdom={this.state.abilityScores.wisdom.value} />
+        <Saves level={this.state.bio.level} saves={this.state.saves} constitution={this.state.abilityScores.constitution.value} dexterity={this.state.abilityScores.dexterity.value} wisdom={this.state.abilityScores.wisdom.value} />
       </div>
     );
   }
